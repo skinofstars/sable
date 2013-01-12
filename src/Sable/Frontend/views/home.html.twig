@@ -1,0 +1,23 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}Index{% endblock %}
+
+{% block head %}
+    {{ parent() }}
+    <script type="text/javascript">
+        Aloha.ready( function() {
+            Aloha.jQuery('#region2').aloha();
+        });
+
+
+    </script>
+{% endblock %}
+
+{% block content %}
+    <h1 id="region1">{{regions.title.value}}</h1>
+
+    <div id="region2">
+        {{regions.body.value|raw}}
+    </div>
+
+{% endblock %}
