@@ -5,11 +5,6 @@
             <link rel="stylesheet" href="style.css" />
             <title>{% block title %}{% endblock %} - My Webpage</title>
 
-            <!-- Load Aloha Editor css and js -->
-            <link rel="stylesheet" href="/javascripts/aloha/css/aloha.css" type="text/css">
-            <script src="/javascripts/aloha/lib/require.js"></script>
-            <script src="/javascripts/aloha/lib/aloha.js" data-aloha-plugins="common/ui,common/format,common/highlighteditables,common/link"></script>
-
         {% endblock %}
     </head>
     <body>
@@ -18,7 +13,7 @@
         </div>
         <div id="footer">
             {% block footer %}
-                &copy; Copyright 2011 by <a href="http://domain.invalid/">you</a>.
+                CC by <a href="http://domain.invalid/">you</a>.
             {% endblock %}
         </div>
     </body>

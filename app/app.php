@@ -11,7 +11,7 @@ use Sable\Page;
 // ROUTES
 // homepage
 $app->get('/', function() use ($app){
-    $page = new Page($app);
+    $page = new Page($app, 'home');
     return $page->render();
 });
 

@@ -6,18 +6,45 @@ use Sable\Region;
 
 class Page
 {
-    protected $regions = array();
     protected $app;
-    protected $pagename = 'home';
 
+    // we should probably do getters and setters...
+    // keep it simple for now
+    protected $id;
+    protected $title;
+    protected $slug = 'error-404';
 
-    public function __construct($app, $pagename='')
+    protected $regions = array();
+    
+    public function __construct($app, $slug='')
     {
         $this->app = $app;
 
-        if ($pagename != '') {
-            $this->pagename = $pagename;
+        if ($slug != '') {
+            $this->slug = $slug;
+
+            // for now, we only load a page if a slug is provided
+            $this->loadPage($this->slug);
         }
+    }
+
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    public function loadPage($slug)
+    {
+        // is $slug sanatised?
+        // 
+        // is there a better way? fetchOne?
+        $sql = "SELECT DISTINCT * FROM pages WHERE slug = ?";
+        $results = $this->app['db']->fetchAll($sql, array($this->slug));
+
+        $this->id = $results[0]['id'];
+        $this->title = $results[0]['title'];
+
+        $this->regions = $this->getRegions();
     }
 
     /**
@@ -25,18 +52,19 @@ class Page
      *
      * @return array
      */
-    public function getRegions()
+    protected function getRegions()
     {
-        // at the moment we're assuming regions have their page mapping as a column
-        // however, we should be loading a page and then regions
-        // regions should have a many to many relationship with pages
 
-        $sql = "SELECT * FROM regions WHERE page = ?";
-        $results = $this->app['db']->fetchAll($sql, array($this->pagename));
+        // load the page_region_rels table, then each region loads using it's own sql.
+        // TODO sort this into a single load. who knows how many regions you'd get on a page?!
+
+        $sql = "SELECT * FROM page_region_rel WHERE page_id = ?";
+        $results = $this->app['db']->fetchAll($sql, array($this->id));
 
         // prepare for display
         foreach ($results as $result) {
-            $regions[$result['name']] = $result;
+            $region = new Region($this->app, $result['region_id']);
+            $regions[$region->getName()] = $region;
         }
 
         return $regions;
@@ -44,8 +72,10 @@ class Page
 
     public function render()
     {
-        return $this->app['twig']->render($this->pagename.'.html.twig', array(
-            'regions' => $this->getRegions(),
+        // could do with knowing what twig tempates are available 
+
+        return $this->app['twig']->render($this->slug.'.html.twig', array(
+            'regions' => $this->regions,
         ));
     }
 }
