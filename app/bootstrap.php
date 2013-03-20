@@ -12,6 +12,8 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__.'/../src/Sable/Frontend/views',
 ));
 
+$app->register(new Silex\Provider\UrlGeneratorServiceProvider());
+
 // FORMS
 // we'll need this for editing pages.
 // ideally we build the forms dynamically depending on the fields available for a page
