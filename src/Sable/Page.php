@@ -6,26 +6,36 @@ use Sable\Region;
 
 class Page
 {
-    protected $app;
-
-    // we should probably do getters and setters...
-    // keep it simple for now
     protected $id;
+    protected $slug;
     protected $title;
-    protected $slug = 'error-404';
-
     protected $regions = array();
-    
-    public function __construct($app, $slug='')
+
+    // TODO $tags
+
+    public function __construct()
     {
-        $this->app = $app;
 
-        if ($slug != '') {
-            $this->slug = $slug;
+    }
 
-            // for now, we only load a page if a slug is provided
-            $this->loadPage($this->slug);
-        }
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
     }
 
     public function getTitle()
@@ -33,49 +43,39 @@ class Page
         return $this->title;
     }
 
-    public function loadPage($slug)
+    public function setTitle($title)
     {
-        // is $slug sanatised?
-        // 
-        // is there a better way? fetchOne?
-        $sql = "SELECT DISTINCT * FROM pages WHERE slug = ?";
-        $results = $this->app['db']->fetchAll($sql, array($this->slug));
+        $this->title = $title;
+    }
+    
 
-        $this->id = $results[0]['id'];
-        $this->title = $results[0]['title'];
+    /**
+     * Add a region
+     *
+     * @param $region
+     * @return $this
+     */
+    public function addRegion(Region $region)
+    {
 
-        $this->regions = $this->getRegions();
+        if (!in_array($region, $this->regions)) {
+            $this->regions[$region->getName()] = $region;
+        }
+
+        return $this;
     }
 
     /**
-     * Get the regions for a Page
+     * Returns the regions for a page.
      *
-     * @return array
+     * @return region[] The page regions
      */
-    protected function getRegions()
+    public function getRegions()
     {
-
-        // load the page_region_rels table, then each region loads using it's own sql.
-        // TODO sort this into a single load. who knows how many regions you'd get on a page?!
-
-        $sql = "SELECT * FROM page_region_rel WHERE page_id = ?";
-        $results = $this->app['db']->fetchAll($sql, array($this->id));
-
-        // prepare for display
-        foreach ($results as $result) {
-            $region = new Region($this->app, $result['region_id']);
-            $regions[$region->getName()] = $region;
-        }
-
-        return $regions;
+        return $this->regions;
     }
 
-    public function render()
-    {
-        // could do with knowing what twig tempates are available 
 
-        return $this->app['twig']->render($this->slug.'.html.twig', array(
-            'regions' => $this->regions,
-        ));
-    }
+
+
 }

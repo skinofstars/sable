@@ -4,15 +4,35 @@ namespace Sable;
 
 class Region
 {
-    protected $app;
-
     protected $id;
     protected $name;
     protected $value;
 
+    // TODO $tags
+
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
     public function getName()
     {
         return $this->name;
+    }
+
+    public function setValue($value)
+    {
+        $this->value = $value;
     }
 
     public function getValue()
@@ -20,27 +40,9 @@ class Region
         return $this->value;
     }
 
-    public function __construct($app, $id)
+    public function __construct()
     {
-        $this->app = $app;
 
-        if (isset($id)) {
-            $this->id = $id;
-            $this->loadRegion();
-
-            return $this;
-        }
-    }
-
-    public function loadRegion()
-    {
-        // FIXME - again, there must be a better way of loading
-
-        $sql = "SELECT DISTINCT * FROM regions WHERE id = ?";
-        $results = $this->app['db']->fetchAll($sql, array($this->id));
-
-        $this->name = $results[0]['name'];
-        $this->value = $results[0]['value'];
     }
 
 }
