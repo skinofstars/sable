@@ -1,4 +1,5 @@
 Sable
 =====
 
-A dinky CMS
+A dinky CMS for managing content as regions within pages.
+
