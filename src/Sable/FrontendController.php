@@ -22,11 +22,7 @@ class FrontendController
     public function __construct(Application $app)
     {
         $this->app = $app;
-        $this->init();
-    }
 
-    public function init()
-    {
         $this->app->get('/', function() use ($app){
             $page = $this->loadPage('home');
             return $this->render($page);
@@ -50,9 +46,7 @@ class FrontendController
         }
 
         $page = new Page();
-        $page->setSlug($slug);
-        $page->setId($results[0]['id']);
-        $page->setTitle($results[0]['title']);
+        $page->fromArray($results[0]);
 
         $regions = $this->getPageRegions($page->getId());
         foreach ($regions as $region) {
@@ -82,9 +76,7 @@ class FrontendController
         // compile results
         foreach ($results as $result) {
             $region = new Region();
-            $region->setId($result['id']);
-            $region->setName($result['name']);
-            $region->setValue($result['value']);
+            $region->fromArray($result);
 
             $regions[$region->getName()] = $region;
         }
