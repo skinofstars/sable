@@ -18,20 +18,14 @@ class FrontendController
      * @var \Silex\Application
      */
     protected $app;
+    protected $page;
 
-    public function __construct(Application $app)
+    public function __construct(Application $app, $pagename = 'home')
     {
         $this->app = $app;
 
-        $this->app->get('/', function() use ($app){
-            $page = $this->loadPage('home');
-            return $this->render($page);
-        });
-
-        $this->app->get('/{pagename}', function ($pagename) use ($app) {
-            $page = $this->loadPage($pagename);
-            return $this->render($page);
-        });
+        $this->page = $this->loadPage($pagename);
+        //return $this->render($page);
     }
 
 
@@ -84,7 +78,7 @@ class FrontendController
         return $regions;
     }
 
-    public function render($page)
+    public function render()
     {
         // we want to do a check to see if there is template for a slug.
         // 
@@ -99,14 +93,14 @@ class FrontendController
         $fs = new Filesystem(); 
         $dir = __dir__ . '/Frontend/views/';
 
-        $file = $dir . $page->getSlug() . '.html.twig';
+        $file = $dir . $this->page->getSlug() . '.html.twig';
 
         if ($fs->exists($file)) {
-            $fileToRender = $page->getSlug() . '.html.twig';
+            $fileToRender = $this->page->getSlug() . '.html.twig';
         } 
 
         return $this->app['twig']->render($fileToRender, array(
-            'regions' => $page->getRegions(),
+            'regions' => $this->page->getRegions(),
         ));
     }
 
