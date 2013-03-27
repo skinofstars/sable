@@ -1,6 +1,6 @@
 <?php
 
-require_once __DIR__.'/bootstrap.php';
+$app = require_once __DIR__.'/bootstrap.php';
 
 use Sable\FrontendController;
 use Sable\AdminController;
@@ -20,3 +20,5 @@ $app->get('/{slug}', function($slug) use ($app) {
     $fc = new FrontendController($app, $slug);
     return $fc->render();
 });
+
+return $app;

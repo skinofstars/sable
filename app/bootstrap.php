@@ -29,3 +29,5 @@ $app->register(new Silex\Provider\DoctrineServiceProvider(), array(
         'driver'    => DB_DRIVER,
     ),
 ));
+
+return $app;
