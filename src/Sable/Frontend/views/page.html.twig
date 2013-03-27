@@ -7,8 +7,9 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Page</h1>
-    <p class="important">
-       This is a page
-    </p>
+    <h1 id="region1">{{regions.title.value}}</h1>
+
+    <div id="region2">
+        {{regions.body.value|raw}}
+    </div>
 {% endblock %}

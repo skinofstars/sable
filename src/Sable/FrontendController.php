@@ -20,23 +20,22 @@ class FrontendController
     protected $app;
     protected $page;
 
-    public function __construct(Application $app, $pagename = 'home')
+    public function __construct(Application $app, $slug = 'home')
     {
         $this->app = $app;
 
-        $this->page = $this->loadPage($pagename);
+        $this->page = $this->loadPage($slug);
         //return $this->render($page);
     }
 
 
     public function loadPage($slug)
     {
-        
         $sql = "SELECT DISTINCT * FROM pages WHERE slug = ?";
         $results = $this->app['db']->fetchAll($sql, array($slug));
 
         if (!isset($results[0])) {
-            $app->abort(404, "Page $slug does not exist.");
+            $this->app->abort(404, "Page $slug does not exist.");
         }
 
         $page = new Page();

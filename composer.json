@@ -6,6 +6,7 @@
         "symfony/monolog-bridge": "2.1.*",
         "symfony/twig-bridge": "2.1.*",
         "symfony/filesystem": "2.1.*",
+        "symfony/browser-kit": "2.3.*@dev",
         "monolog/monolog": ">=1.0.0,<1.2-dev",
         "twig/twig": ">=1.2.0,<2.0-dev",
         "doctrine/dbal": ">=2.2.0,<2.4.0-dev",

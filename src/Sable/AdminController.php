@@ -16,12 +16,16 @@ class AdminController
      * @var \Silex\Application
      */
     protected $app;
+    protected $page;
 
     public function __construct(Application $app)
     {
         $this->app = $app;
-        $this->init();
+
+        //$this->page = $this->loadPage($slug);
+        //return $this->render($page);
     }
+
 
     public function init()
     {
