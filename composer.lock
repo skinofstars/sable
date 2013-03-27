@@ -1,5 +1,5 @@
 {
-    "hash": "9eb0f93b55e1a7f0e1036d9abdf79594",
+    "hash": "21665482dcf2f631bd5f23088fb64dce",
     "packages": [
         {
             "name": "doctrine/common",
@@ -414,38 +414,80 @@
             "time": "2013-03-20 14:03:03"
         },
         {
+            "name": "symfony/css-selector",
+            "version": "dev-master",
+            "target-dir": "Symfony/Component/CssSelector",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/CssSelector.git",
+                "reference": "6ba87b45946163ad13b525932a9050e8570ec7de"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/CssSelector/zipball/6ba87b45946163ad13b525932a9050e8570ec7de",
+                "reference": "6ba87b45946163ad13b525932a9050e8570ec7de",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.3-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Symfony\\Component\\CssSelector\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony CssSelector Component",
+            "homepage": "http://symfony.com",
+            "time": "2013-01-31 21:39:01"
+        },
+        {
             "name": "symfony/dom-crawler",
-            "version": "v2.2.0",
+            "version": "2.1.x-dev",
             "target-dir": "Symfony/Component/DomCrawler",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/DomCrawler.git",
-                "reference": "v2.2.0"
+                "reference": "83d753c3629222a822b19ee4ee494aa3000099f6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/DomCrawler/zipball/v2.2.0",
-                "reference": "v2.2.0",
+                "url": "https://api.github.com/repos/symfony/DomCrawler/zipball/83d753c3629222a822b19ee4ee494aa3000099f6",
+                "reference": "83d753c3629222a822b19ee4ee494aa3000099f6",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
             },
             "require-dev": {
-                "symfony/css-selector": ">=2.0,<3.0"
+                "symfony/css-selector": "2.1.*"
             },
             "suggest": {
-                "symfony/css-selector": "2.2.*"
+                "symfony/css-selector": "2.1.*"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.2-dev"
-                }
-            },
             "autoload": {
                 "psr-0": {
-                    "Symfony\\Component\\DomCrawler\\": ""
+                    "Symfony\\Component\\DomCrawler": ""
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -464,7 +506,7 @@
             ],
             "description": "Symfony DomCrawler Component",
             "homepage": "http://symfony.com",
-            "time": "2013-03-01 06:43:14"
+            "time": "2013-03-27 17:13:16"
         },
         {
             "name": "symfony/event-dispatcher",
@@ -1087,7 +1129,9 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "silex/silex": 20,
-        "symfony/browser-kit": 20
+        "symfony/browser-kit": 20,
+        "symfony/dom-crawler": 20,
+        "symfony/css-selector": 20
     },
     "platform": [
 

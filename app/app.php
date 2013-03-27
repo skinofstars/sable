@@ -1,6 +1,6 @@
 <?php
 
-$app = require_once __DIR__.'/bootstrap.php';
+$app = require __DIR__.'/bootstrap.php';
 
 use Sable\FrontendController;
 use Sable\AdminController;
